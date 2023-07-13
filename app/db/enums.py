@@ -6,11 +6,22 @@ class SourceApp(str, Enum):
 
 
 class ActionType(str, Enum):
+    AGILITY_PLAN = "AGILITY_PLAN"
+    PLAYBOOK = "PLAYBOOK"
+    JOB = "JOB"
+    OBJECTIVE = "OBJECTIVE"
     COURSE = "COURSE"
     ASSESSMENT = "ASSESSMENT"
     MENTORING = "MENTORING"
     PLAY = "PLAY"
     NONE = ""
+
+
+class ActionStatus(str, Enum):
+    INITIAL = "INITIAL"
+    STARTED = "STARTED"
+    BLOCKED = "BLOCKED"
+    COMPLETED = "COMPLETED"
 
 
 class ResourceType(str, Enum):

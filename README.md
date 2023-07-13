@@ -1,4 +1,4 @@
-# Atlas Beacon App
+# Agile Board App
 
 ## Features
 

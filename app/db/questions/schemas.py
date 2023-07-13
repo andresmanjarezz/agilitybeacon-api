@@ -8,6 +8,8 @@ class QuestionBase(BaseModel):
     name: str = None
     description: str = None
     dimension_id: int = None
+    baseline_value: float = None
+    target_value: float = None
     created_by: int = None
     updated_by: int = None
 

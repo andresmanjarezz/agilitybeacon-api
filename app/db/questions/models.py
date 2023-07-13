@@ -1,5 +1,5 @@
 from typing import List
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, Numeric, ForeignKey
 from app.db.session import Base
 from app.db.core import CoreBase, TrackTimeMixin
 from sqlalchemy.orm import relationship
@@ -13,3 +13,5 @@ class Question(Base, CoreBase, TrackTimeMixin):
     name = Column(String)
     description = Column(String, nullable=True)
     dimension_id = Column(Integer, ForeignKey("dimensions.id"), nullable=True)
+    baseline_value = Column(Numeric)
+    target_value = Column(Numeric)

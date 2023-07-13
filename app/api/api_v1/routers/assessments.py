@@ -3,6 +3,7 @@ import typing as t
 
 from app.db.session import get_db
 from app.db.assessments.models import Assessment
+from app.db.dimensions.models import Dimension
 from app.db.core import (
     get_lists,
     get_item,
@@ -10,6 +11,7 @@ from app.db.core import (
     delete_item,
     edit_item,
 )
+from app.db.assessments.crud import get_assessment_by_id
 
 from app.db.assessments.schemas import (
     AssessmentEdit,
@@ -49,7 +51,15 @@ async def assessment_details(
     """
     Get any assessment details
     """
-    return get_item(db, Assessment, assessment_id)
+    assessment = get_assessment_by_id(db, assessment_id)
+    if assessment == "No result found for query":
+        return
+    assessment.dimensions = (
+        db.query(Dimension)
+        .filter(Dimension.assessment_id == assessment_id)
+        .all()
+    )
+    return assessment
 
 
 @r.post(

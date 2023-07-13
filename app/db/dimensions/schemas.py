@@ -10,8 +10,6 @@ class DimensionBase(BaseModel):
     name: str = None
     description: str = None
     assessment_id: int = None
-    baseline_value: int = None
-    ideal_value: int = None
     created_by: int = None
     updated_by: int = None
 

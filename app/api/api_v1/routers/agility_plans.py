@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Request, Depends, Response
 import typing as t
+from app.db.measurements.crud import get_measurements_by_objective_id
 
 from app.db.session import get_db
 from app.db.agility_plans import models
@@ -70,6 +71,7 @@ async def agility_plans_list(
                 lambda x: x.id in related_ids["ACTION"], agility_plan.actions
             )
         )
+        print(agility_plan.objectives)
         agility_plan.objectives = list(
             filter(
                 lambda x: x.id in related_ids["OBJECTIVE"],
@@ -91,9 +93,7 @@ async def agility_plans_list(
             )
         )
         agility_plan.coaches = list(
-            filter(
-                lambda x: x.id in related_ids["COACH"], agility_plan.coaches
-            )
+            filter(lambda x: x.id in related_ids["COACH"], agility_plan.coaches)
         )
 
     response.headers["Content-Range"] = f"0-9/{len(filtered_agility_plans)}"
@@ -154,6 +154,9 @@ async def agility_plan_details(
             .one()
         )
         objective.stwert = user.first_name
+        objective.measurements = get_measurements_by_objective_id(
+            db, objective.id
+        )
     agility_plan.lead_ids = related_ids["LEAD"]
     agility_plan.sponsor_ids = related_ids["SPONSOR"]
     agility_plan.coreteam_ids = related_ids["CORETEAM"]

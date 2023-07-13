@@ -23,10 +23,10 @@ def upgrade():
             "agility_plan_id", sa.Integer(), sa.ForeignKey("agility_plans.id")
         ),
     )
-    op.add_column(
-        "objectives",
-        sa.Column("stwert", sa.ForeignKey("users.id")),
-    )
+    # op.add_column(
+    #     "objectives",
+    #     sa.Column("stwert", sa.ForeignKey("users.id")),
+    # )
 
 
 def downgrade():

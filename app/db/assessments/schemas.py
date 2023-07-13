@@ -8,6 +8,8 @@ from app.db.users.schemas import UserName
 class AssessmentBase(BaseModel):
     name: str = None
     description: str = None
+    agility_plan_id: int
+    is_locked: bool
     created_by: int = None
     updated_by: int = None
 
